@@ -12,8 +12,6 @@ import java.util.List;
 
 public class FolderBuilder {
 
-	//* Esempio di chiamata : ll -R | grep java | sed -e 's|  *| |g'| cut -d ' ' -f 9| xargs java -classpath /c/DevRootMediolanum/Projects/build4VP/src/exec exec.FolderBuilder /c/Repository_Bmed/VP/Paypal /c/Repository_Bmed/med-git/ib-fe-jbus-paypal
-	//* @param args[2..] = "ll -R | grep java | sed -e 's/  *&#47 /g'| cut -d ' ' -f 9"
 	/**
 	 * Esempio di chiamata : java -classpath /c/DevRootMediolanum/Projects/build4VP/src/exec exec.FolderBuilder /c/Repository_Bmed/VP/Paypal /c/Repository_Bmed/med-git/ib-fe-jbus-paypal
 	 * 
@@ -23,29 +21,11 @@ public class FolderBuilder {
 	 */
 	public static void main(String[] args) throws IOException{
 		
-//		String path = "";
-		
 		List<File> fileList = listFilesForFolder(new File(args[1]));
 
 		for(File file : fileList){
 			copyFile(file,args[0]);
 		}
-		
-//		for(int i = 2; i<args.length; i++){
-//			String arg = args[i];
-//
-//			if ("java".equals(arg)){
-//				continue;
-//			}
-//			if (arg.startsWith("./")){
-//				path=arg.replaceFirst(":$", "\\/").replaceFirst("\\.", "");
-//				path=args[1]+path;
-//			} else {
-//				//copio i file uno alla volta
-//				File file = new File(path+arg);
-//				copyFile(file,args[0]);
-//			}
-//		}
 		
 	}
 	
@@ -57,7 +37,6 @@ public class FolderBuilder {
 	        } else {
 	        	if(fileEntry.getAbsolutePath().matches(".*java.+")){
 	        		out.add(fileEntry);
-//	        		System.out.println(fileEntry.getAbsolutePath());
 	        	}
 	        }
 	    }
