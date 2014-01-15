@@ -13,23 +13,24 @@ import java.util.List;
 public class FolderBuilder {
 
 	/**
-	 * Esempio di chiamata : java -classpath /c/DevRootMediolanum/Projects/build4VP/src/exec exec.FolderBuilder /c/Repository_Bmed/VP/Paypal /c/Repository_Bmed/med-git/ib-fe-jbus-paypal
+	 * Esempio di chiamata : java -classpath /c/DevRootMediolanum/Projects/build4VP/src/exec exec.FolderBuilder /c/Repository_Bmed/med-git/ib-fe-jbus-paypal /c/Repository_Bmed/VP/Paypal
 	 * 
-	 * @param args[0] = nome cartella di destinazione (es. /c/Repository_Bmed/VP/Paypal)
-	 * @param args[1] = nome cartella di origine (es. /c/Repository_Bmed/med-git/ib-fe-jbus-paypal)
+	 * @param args[0] = nome cartella di origine (es. /c/Repository_Bmed/med-git/ib-fe-jbus-paypal)
+	 * @param args[1] = nome cartella di destinazione (es. /c/Repository_Bmed/VP/Paypal)
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException{
+		System.out.println(args[0] + " " +args[1]);
+		List<File> fileList = listFilesForFolder(new File(args[0]));
 		
-		List<File> fileList = listFilesForFolder(new File(args[1]));
-
 		for(File file : fileList){
-			copyFile(file,args[0]);
+			copyFile(file,args[1]);
 		}
-		
 	}
 	
 	private static List<File> listFilesForFolder(final File folder) {
+		System.out.println(folder.exists());
+		System.out.println(folder.getAbsolutePath());
 		List<File> out = new ArrayList<File>();
 	    for (final File fileEntry : folder.listFiles()) {
 	        if (fileEntry.isDirectory() && !fileEntry.getName().startsWith(".")) {
@@ -105,7 +106,5 @@ public class FolderBuilder {
 	    	System.err.println("ERROR - " + file.getAbsolutePath() + " NOT FOUND");
 	    	System.out.println("");
 	    }
-
 	}
-	
 }
