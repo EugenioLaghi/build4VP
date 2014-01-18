@@ -13,14 +13,15 @@ import java.util.List;
 public class FolderBuilder {
 
 	/**
-	 * Esempio di chiamata : java -classpath /c/DevRootMediolanum/Projects/build4VP/src/exec exec.FolderBuilder /c/Repository_Bmed/med-git/ib-fe-jbus-paypal /c/Repository_Bmed/VP/Paypal
+	 * invocation example : java -classpath build4VP_FOLDER exec.FolderBuilder SOURCE_FOLDER DESTINATION_FOLDER
+	 * (implemented also via maven, see pom.xml)
 	 * 
-	 * @param args[0] = nome cartella di origine (es. /c/Repository_Bmed/med-git/ib-fe-jbus-paypal)
-	 * @param args[1] = nome cartella di destinazione (es. /c/Repository_Bmed/VP/Paypal)
+	 * @param args[0] = source folder's name (es. /c/Repository_Bmed/med-git/ib-fe-jbus-paypal)
+	 * @param args[1] = destination folder's name (es. /c/Repository_Bmed/VP/Paypal)
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException{
-		System.out.println(args[0] + " " +args[1]);
+//		System.out.println(args[0] + " " +args[1]);
 		List<File> fileList = listFilesForFolder(new File(args[0]));
 		
 		for(File file : fileList){
@@ -29,8 +30,8 @@ public class FolderBuilder {
 	}
 	
 	private static List<File> listFilesForFolder(final File folder) {
-		System.out.println(folder.exists());
-		System.out.println(folder.getAbsolutePath());
+//		System.out.println(folder.exists());
+//		System.out.println(folder.getAbsolutePath());
 		List<File> out = new ArrayList<File>();
 	    for (final File fileEntry : folder.listFiles()) {
 	        if (fileEntry.isDirectory() && !fileEntry.getName().startsWith(".")) {
@@ -59,7 +60,7 @@ public class FolderBuilder {
 		    line = line.replaceFirst("package ", "");
 		    line = line.replaceFirst(";", "");
 		    
-		    //Creo la cartella
+		    //Folder creation
 		    line = line.replaceAll("\\.", "\\\\");
 		    
 		    line = path+"\\"+line;
@@ -74,7 +75,7 @@ public class FolderBuilder {
 		    	}
 		    }
 		    
-		    //Creo il file
+		    //File creation
 		    String newFilePath = line+"\\"+file.getAbsolutePath().replaceAll(".*\\\\", "");
 		    
 		    File newFile = new File(newFilePath);
@@ -85,7 +86,7 @@ public class FolderBuilder {
 		    	System.out.println("ERROR - " + newFile.getAbsolutePath() + " already exists");
 		    }
 		    
-		    //Copio il file
+		    //File copy
 		    FileChannel source = new FileInputStream(file).getChannel();
 		    FileChannel destination = new FileOutputStream(newFile).getChannel();
 
