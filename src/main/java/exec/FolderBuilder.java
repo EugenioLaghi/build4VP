@@ -21,7 +21,6 @@ public class FolderBuilder {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException{
-//		System.out.println(args[0] + " " +args[1]);
 		List<File> fileList = listFilesForFolder(new File(args[0]));
 		
 		for(File file : fileList){
@@ -30,8 +29,6 @@ public class FolderBuilder {
 	}
 	
 	private static List<File> listFilesForFolder(final File folder) {
-//		System.out.println(folder.exists());
-//		System.out.println(folder.getAbsolutePath());
 		List<File> out = new ArrayList<File>();
 	    for (final File fileEntry : folder.listFiles()) {
 	        if (fileEntry.isDirectory() && !fileEntry.getName().startsWith(".")) {
